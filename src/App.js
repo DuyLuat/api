@@ -1,23 +1,57 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
+import Menu from './components/Menu/Menu';
+import ProductList from './components/ProductList/ProductList';
+import routes from './routes';
+import {Route, Routes, BrowserRouter} from 'react-router-dom'
 
 class App extends Component {
   render(){
-  return (
-    <div className="navbar navbar-default">
-      <a className="navbar-brand">CALL API</a>
-      <ul className="nav navbar-nav">
-        <li>
-          <a>Trang chủ</a>
-        </li>
-        <li>
-          <a>Danh sách sản phẩm</a>
-        </li>
-      </ul>
-    </div>
 
+  return (
+    <BrowserRouter>
+ <div>
+
+<Menu />
+
+<div className="container">
+
+<div className="row">
+   {/* <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<button type="button" className="btn btn-info mb-10">Thêm sản phẩm</button>
+
+<ProductList />
+
+</div> */}
+{  this.showContentMenus(routes)}
+
+</div>
+
+</div>
+
+
+</div>
+ </BrowserRouter>
+   
   );
 }
+  showContentMenus = (routes) =>{
+    var result=null;
+
+    if(routes.length>0){
+      result=routes.map((route, index)=>{
+        <Route 
+        key={index}
+        path={route.path}
+        exact={route.exact}
+        component={route.main}
+        />
+      });
+    }
+    return <Routes> { result }</Routes>;
+
+  }
+
 }
 
 export default App;
