@@ -1,23 +1,70 @@
 import React, { Component } from 'react';
+import { Route, Link, Routes } from 'react-router-dom';
+
+const menus = [
+    {
+        name: 'Trang Chủ',
+        to: '/',
+        exact: true
+    },
+    {
+        name: 'Quản Lý Sản Phẩm',
+        to: '/product-list',
+        exact: false
+    }
+];
+
+const MenuLink = (label, to, activeOnlyWhenExact) => {
+    return (
+      <Routes>
+        <Route
+            path={to}
+            exact={activeOnlyWhenExact}
+            children={( match ) => {
+                var active = match ? 'active' : '';
+                return (
+                    <li className={active}>
+                        <Link to={to}>
+                            {label}
+                        </Link>
+                    </li>
+                );
+            }}
+        />
+      </Routes>
+        
+    );
+};
 
 class Menu extends Component {
     render() {
         return (
-            
-       <div className="navbar navbar-default">
-      <a className="navbar-brand">CALL API</a>
-      <ul className="nav navbar-nav">
-        <li>
-          <a>Trang chủ</a>
-        </li>
-        <li>
-          <a>Danh sách sản phẩm</a>
-        </li>
-      </ul>
-    </div>
-        
+            <div className="navbar navbar-default">
+                <a className="navbar-brand">CALL API</a>
+                <ul className="nav navbar-nav">
+                    {this.showMenus(menus)}
+                </ul>
+            </div>
         );
     }
+
+    showMenus = (menus) => {
+        var result = null;
+        if(menus.length > 0){
+            result = menus.map((menu, index) => {
+                return (
+                    <MenuLink 
+                        key={index}
+                        label={menu.name}
+                        to={menu.to}
+                        activeOnlyWhenExact={menu.exact}
+                    />
+                );
+            });
+        }
+        return result;
+    }
+
 }
 
 export default Menu;

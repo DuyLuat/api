@@ -10,7 +10,7 @@ class ProductList extends Component {
             </div>
             <div className="panel-body">
              
-             <table class="table table-bordered table-hover">
+             <table className="table table-bordered table-hover">
                <thead>
                  <tr>
                    <th>TT</th>
@@ -22,9 +22,9 @@ class ProductList extends Component {
                  </tr>
                </thead>
                <tbody>
+                 {this.props.children}        {/* là các <ProductItem />  truyền đến từ file ProductListPage.js 
+                 (ban đầu là các <ProductItem /> của component ProductItem */}
                 
-<ProductItem />
-
                </tbody>
              </table>
              

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ProductItem from '../../components/ProductItem/ProductItem';
-import {ProductList} from './../../components/ProductList/ProductList'
+import ProductList from './../../components/ProductList/ProductList'
 
 class ProductListPage extends Component {
     render() {
+        var products=[];
         return (
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <button type="button" className="btn btn-info mb-10">Thêm sản phẩm</button>
@@ -28,6 +29,7 @@ class ProductListPage extends Component {
                 );
             });
         }
+        return result;
 
     }
 }
