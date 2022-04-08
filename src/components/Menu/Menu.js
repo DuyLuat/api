@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const menus = [
     {
@@ -11,30 +11,35 @@ const menus = [
         name: 'Quản Lý Sản Phẩm',
         to: '/product-list',
         exact: false
+    },
+    {
+        name: 'Thêm sản phẩm',
+        to: '/product/add',
+        exact: false
     }
 ];
 
-const MenuLink = (label, to, activeOnlyWhenExact) => {
-    return (
-      <Routes>
-        <Route
-            path={to}
-            exact={activeOnlyWhenExact}
-            children={( match ) => {
-                var active = match ? 'active' : '';
-                return (
-                    <li className={active}>
-                        <Link to={to}>
-                            {label}
-                        </Link>
-                    </li>
-                );
-            }}
-        />
-      </Routes>
+// const MenuLink = (label, to, activeOnlyWhenExact) => {
+//     return (
+//       <Routes>
+//         <Route
+//             path={to}
+//             exact={activeOnlyWhenExact}
+//             children={( match ) => {
+//                 var active = match ? 'active' : '';
+//                 return (
+//                     <li className={active}>
+//                         <Link to={to}>
+//                             {label}
+//                         </Link>
+//                     </li>
+//                 );
+//             }}
+//         />
+//       </Routes>
         
-    );
-};
+//     );
+// };
 
 class Menu extends Component {
     render() {
@@ -43,8 +48,24 @@ class Menu extends Component {
                 <a className="navbar-brand">CALL API</a>
                 <ul className="nav navbar-nav">
                     {this.showMenus(menus)}
+                    {/* <li class="active">
+                    <Link to='/'>Trang chủ</Link>
+                    </li>
+                    <li>
+                    <Link to='/product-list'>DS Sản phẩm</Link>
+                    </li>  
+                    <li>
+                    <Link to='/product/add'>Thêm sản phẩm</Link>
+                    </li>
+                    
+                    <li>
+                    <Link to='/product/:id/edit'>Sửa sản phẩm</Link>
+                    </li> */}
                 </ul>
             </div>
+            
+       
+            
         );
     }
 
@@ -53,12 +74,15 @@ class Menu extends Component {
         if(menus.length > 0){
             result = menus.map((menu, index) => {
                 return (
-                    <MenuLink 
+                    <li>
+                        <Link 
                         key={index}
-                        label={menu.name}
                         to={menu.to}
-                        activeOnlyWhenExact={menu.exact}
-                    />
+                        exact={menu.exact}
+                         >{menu.name}</Link>
+
+                    </li>
+                    
                 );
             });
         }
